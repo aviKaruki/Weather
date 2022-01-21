@@ -7,6 +7,18 @@ const messageFour = document.querySelector("#sunrise");
 const messageFive = document.querySelector("#sunset");
 const messageSix = document.querySelector("#uvi");
 
+const timeConverter = (UNIX_timestamp) => {
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var orig = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return orig;
+  }
 
 const weather = (location) => {
 
@@ -25,8 +37,8 @@ const weather = (location) => {
         }
         else {
             messageOne.textContent  = "Location   : " + data[1].location;
-            messageFour.textContent = "Sunrise    : " + data[0].sunrise;
-            messageFive.textContent = "Sunset     : " + data[0].sunset;
+            messageFour.textContent = "Sunrise    : " + timeConverter(data[0].sunrise);
+            messageFive.textContent = "Sunset     : " + timeConverter(data[0].sunset);
             messageTwo.textContent = "Temperature : " + data[0].Temperature;
             messageThree.textContent = "Weather   : " + data[0].weather;
             messageSix.textContent = "UVI         : " + data[0].uvi;
